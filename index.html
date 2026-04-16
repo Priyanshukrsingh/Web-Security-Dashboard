@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Web Security Scanner Dashboard</title>
+    <link rel="stylesheet" href="static/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+        <!-- Left Column -->
+        <div class="left-col">
+            <div class="main-blue-header">
+                🛡️ Web Security Scanner Dashboard
+            </div>
+
+            <div class="search-bar">
+                <input type="text" id="domain" placeholder="google.com">
+                <select id="secondary-domain">
+                    <option>example.com</option>
+                </select>
+                <select id="scan-type">
+                    <option>Full Scan</option>
+                </select>
+                <button onclick="startScan()" id="scan-btn">Start Scan</button>
+            </div>
+
+            <div class="cards-row">
+                <div class="card metric-card">
+                    <div class="card-header">
+                        <span>Security Score</span>
+                        <span class="dots">...</span>
+                    </div>
+                    <div class="gauge-container">
+                        <canvas id="gaugeChart" width="160" height="90"></canvas>
+                        <div class="gauge-value" id="score-val">100</div>
+                        <div class="gauge-label" id="score-label">SECURE</div>
+                    </div>
+                </div>
+
+                <div class="card metric-card">
+                    <div class="card-header">
+                        <span>Risk Level</span>
+                        <span class="dots">...</span>
+                    </div>
+                    <div class="flex-center">
+                        <div id="risk-badge" class="badge-large secure-bg">
+                            ▲ SECURE
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card metric-card">
+                    <div class="card-header">
+                        <span>SSL Status</span>
+                        <span class="dots">...</span>
+                    </div>
+                    <div class="flex-center">
+                        <div class="ssl-icon-large">🔒</div>
+                        <div id="ssl-badge" class="badge-pill light-green">Valid</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tables-row">
+                <div class="card no-padding">
+                    <div class="blue-title">☰ Port Scan Results <span class="dash">-</span></div>
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Port</th>
+                                    <th>Status</th>
+                                    <th>Risk</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ports-table">
+                                <tr>
+                                    <td>80</td>
+                                    <td><span class="pill pill-orange">Open</span></td>
+                                    <td>Safe</td>
+                                </tr>
+                                <tr>
+                                    <td>443</td>
+                                    <td><span class="pill pill-orange">Open</span></td>
+                                    <td>Safe</td>
+                                </tr>
+                                <tr>
+                                    <td>21</td>
+                                    <td><span class="pill pill-green">Closed</span></td>
+                                    <td>Safe</td>
+                                </tr>
+                                <tr>
+                                    <td>23</td>
+                                    <td><span class="pill pill-green">Closed</span></td>
+                                    <td>Safe</td>
+                                </tr>
+                                <tr>
+                                    <td>3389</td>
+                                    <td><span class="pill pill-green">Closed</span></td>
+                                    <td>Safe</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card no-padding">
+                    <div class="blue-title">🛡️ Security Headers <span class="dash">-</span></div>
+                    <div class="list-container" id="headers-list">
+                        <div class="list-item"><span class="shield">🛡️</span> Content-Security-Policy <span
+                                class="check">✓</span></div>
+                        <div class="list-item"><span class="shield">🛡️</span> Referrer-Policy <span
+                                class="check">✓</span></div>
+                        <div class="list-item"><span class="shield">🛡️</span> Strict-Transport-Security <span
+                                class="check">✓</span></div>
+                        <div class="list-item"><span class="shield">🛡️</span> X-Content-Type-Options <span
+                                class="check">✓</span></div>
+                        <div class="list-item"><span class="shield">🛡️</span> X-Frame-Options <span
+                                class="check">✓</span></div>
+                    </div>
+                </div>
+
+                <div class="card no-padding">
+                    <div class="blue-title">🔒 SSL Details <span class="dash">-</span></div>
+                    <div class="list-container plain">
+                        <div class="detail-block">
+                            <strong>Issuer</strong>
+                            <div id="ssl-issuer">Google Trust Services</div>
+                        </div>
+                        <div class="detail-block">
+                            <strong>TLS Version</strong>
+                            <div id="tls-version">TLSv1.3</div>
+                        </div>
+                        <div class="detail-block">
+                            <strong>Expires</strong>
+                            <div id="ssl-expiry">Jun 8 08:36:31 2026 GMT</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-col">
+            <div class="charts-row">
+                <div class="card chart-card">
+                    <div class="chart-header">📊 Score Breakdown</div>
+                    <div class="chart-container">
+                        <canvas id="scoreBreakdownChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="card chart-card">
+                    <div class="chart-header">🥧 Risk Distribution</div>
+                    <div class="chart-container risk-container">
+                        <canvas id="riskDistributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer card">
+                <p class="copyright"><strong>© 2026 Web Security Scanner Tool</strong> | Developed by Priyanshu • Data
+                    Sources: SSL | WHOIS | Security Headers | Port Scan</p>
+                <p class="disclaimer">Disclaimer: Security results are based on automated checks using SSL, WHOIS, DNS,
+                    Port Scan, and Security Header analysis. This tool provides an indicative assessment only and should
+                    not be considered a complete security audit.</p>
+                <p class="disclaimer">This tool performs passive security analysis and does not perform intrusive
+                    attacks.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="static/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,170 @@
+* { box-sizing: border-box; }
+body { 
+    margin: 0; 
+    padding: 20px; 
+    color: #333;
+    font-family: 'Inter', sans-serif; 
+    min-height: 100vh;
+    background: linear-gradient(-45deg, #e0c3fc 0%, #8ec5fc 100%);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.main-wrapper { 
+    display: flex; 
+    gap: 20px;
+    max-width: 1400px; 
+    margin: auto; 
+    align-items: stretch;
+}
+
+/* Columns */
+.left-col { flex: 1.5; display: flex; flex-direction: column; gap: 15px; }
+.right-col { flex: 1; display: flex; flex-direction: column; gap: 15px; }
+
+/* Main Header */
+.main-blue-header { 
+    background: #1160ff; 
+    color: white; 
+    padding: 12px 20px; 
+    text-align: center; 
+    border-radius: 8px; 
+    font-weight: 700; 
+    font-size: 20px; 
+    box-shadow: 0 4px 6px rgba(17, 96, 255, 0.2);
+}
+
+/* Search Bar */
+.search-bar { 
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 15px; 
+    display: flex; 
+    gap: 10px; 
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+}
+.search-bar input, .search-bar select { 
+    flex: 1; 
+    padding: 12px 15px; 
+    border: 1px solid #e2e8f0; 
+    border-radius: 6px; 
+    background: #f8fafc; 
+    font-size: 14px;
+    outline: none;
+}
+.search-bar select { flex: 0.5; cursor: pointer; color: #555; }
+.search-bar button { 
+    background: #1160ff; 
+    color: white; 
+    border: none; 
+    padding: 12px 30px; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    font-weight: 600; 
+    font-size: 14px;
+    transition: background 0.2s;
+}
+.search-bar button:hover { background: #0b4bcc; }
+
+/* Card Components */
+.cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.card { 
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px; 
+    padding: 20px; 
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05); 
+    display: flex;
+    flex-direction: column;
+}
+.metric-card { min-height: 190px; text-align: center; border: 1px solid #edf2f7; }
+.card-header { 
+    display: flex; justify-content: space-between; 
+    font-size: 12px; font-weight: 700; color: #4a5568; 
+    margin-bottom: 20px;
+}
+.dots { color: #cbd5e0; letter-spacing: 1px; }
+
+/* Gauge and Center Helpers */
+.flex-center { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.gauge-container { position: relative; margin: 0 auto; width: 160px; height: 90px; }
+.gauge-value { position: absolute; bottom: 15px; width: 100%; text-align: center; font-size: 28px; font-weight: 800; color: #2d3748; line-height: 1; }
+.gauge-label { position: absolute; bottom: 0; width: 100%; text-align: center; font-size: 11px; font-weight: 700; color: #e53e3e; }
+
+/* Badges */
+.badge-large { 
+    padding: 12px 35px; border-radius: 6px; font-weight: 700; font-size: 16px; 
+    color: white; margin-top: 10px; min-width: 140px; text-align: center;
+}
+.secure-bg { background-color: #2bba71; box-shadow: 0 4px 10px rgba(43, 186, 113, 0.3); }
+
+.ssl-icon-large { font-size: 40px; }
+.badge-pill { padding: 6px 20px; border-radius: 30px; font-weight: 700; font-size: 13px; margin-top: 15px; }
+.light-green { background: #e3f7ed; color: #2bba71; }
+
+.tables-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; }
+.no-padding { padding: 0; overflow: hidden; border: 1px solid #e2e8f0; }
+
+.blue-title { 
+    background: #1160ff; color: white; padding: 12px 15px; font-size: 13px; font-weight: 600; 
+    display: flex; justify-content: space-between; align-items: center;
+}
+.dash { cursor: pointer; font-weight: bold; }
+
+/* Table specific styling */
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.data-table th { text-align: left; background: #fafbfc; color: #718096; padding: 12px 15px; border-bottom: 1px solid #edf0f2; font-weight: 600; }
+.data-table td { padding: 12px 15px; border-bottom: 1px solid #f4f5f7; color: #2d3748; font-weight: 500; }
+.data-table tr:last-child td { border-bottom: none; }
+
+.pill { padding: 4px 12px; border-radius: 20px; font-weight: 600; font-size: 11px; }
+.pill-orange { background: #fffaf0; color: #dd6b20; border: 1px solid #feebc8; }
+.pill-green { background: #f0fff4; color: #38a169; border: 1px solid #c6f6d5; }
+
+/* Lists (Security Headers) */
+.list-container { padding: 5px 0; }
+.list-item { 
+    display: flex; align-items: center; gap: 8px; padding: 10px 15px; font-size: 12px; font-weight: 500; 
+    border-bottom: 1px solid #f4f5f7; color: #4a5568;
+}
+.list-item:last-child { border-bottom: none; }
+.shield { filter: grayscale(100%) opacity(0.5); }
+.check { margin-left: auto; color: #38a169; font-weight: bold; }
+
+/* Detail Blocks (SSL Details) */
+.plain { padding: 15px; }
+.detail-block { margin-bottom: 15px; }
+.detail-block:last-child { margin-bottom: 0; }
+.detail-block strong { display: block; font-size: 11px; color: #718096; text-transform: uppercase; margin-bottom: 5px; }
+.detail-block div { font-size: 13px; font-weight: 500; color: #2d3748; }
+
+/* Charts */
+.charts-row { display: flex; gap: 15px; flex: 1; }
+.chart-card { flex: 1; border: 1px solid #e2e8f0; display: flex; flex-direction: column; }
+.chart-header { font-weight: 700; font-size: 14px; color: #2d3748; margin-bottom: 15px; }
+.chart-container { flex: 1; display: flex; align-items: center; justify-content: center; }
+.risk-container { padding: 20px 0; } /* Make pie chart visually balanced */
+
+/* Footer */
+.footer { 
+    margin-top: 5px; padding: 20px; 
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.5); 
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.05); 
+    border-radius: 10px; font-size: 12px; color: #718096; line-height: 1.6;
+}
+.footer p { margin: 0 0 10px 0; }
+.footer p:last-child { margin: 0; }
+.copyright strong { color: #2d3748; }
