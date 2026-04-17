@@ -55,5 +55,5 @@ An **Automated Web Security Scanner** designed to analyze website vulnerabilitie
 
 4. **Open in Browser**  
    ```
-   http://127.0.0.1:5000
+   http://localhost:8000/
    ```
