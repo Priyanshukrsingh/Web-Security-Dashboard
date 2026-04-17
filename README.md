@@ -7,7 +7,7 @@ An automated Web Security Scanner developed to analyze website vulnerabilities a
 ## 👨‍💻 Author & Ownership
 
 **Developed by:**
-**Tarkeshwar Gupta**
+**Priyanshu Kumar Singh**
 B.Tech Cybersecurity Student
 
 *📌 This project, idea, and implementation are original work of the author. 
@@ -45,7 +45,7 @@ Unauthorized copying, reproduction, or commercial use without permission is not 
 
 **1. Clone Repository**
 ```bash
-git clone https://github.com/Tarkeshwargupta/web-security-scanner.git
+git clone https://github.com/Priyanshukrsingh/web-security-scanner.git
 ```
 
 **2. Install Dependencies**
